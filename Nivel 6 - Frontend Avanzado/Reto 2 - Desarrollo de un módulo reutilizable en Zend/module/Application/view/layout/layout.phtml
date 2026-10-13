@@ -1,0 +1,45 @@
+<?php
+/** @var Laminas\View\Renderer\PhpRenderer $this */
+?>
+<?= $this->doctype() ?>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('Laminas MVC')->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?= $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge') ?>
+        <?= $this->headLink()
+            ->prependStylesheet($this->basePath('css/style.css'))
+            ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
+        <?= $this->headScript() ?>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark mb-4" role="navigation">
+            <div class="container">
+                <a class="navbar-brand" href="<?= $this->url('home') ?>">Comentarios</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $this->url('home') ?>">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $this->url('comments') ?>">Comentarios</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <main class="container">
+            <?= $this->content ?>
+        </main>
+        <footer class="container mt-5 mb-4">
+            <hr>
+            <p class="text-muted mb-0">&copy; <?= date('Y') ?></p>
+        </footer>
+        <?= $this->inlineScript()->prependFile($this->basePath('js/bootstrap.min.js')) ?>
+    </body>
+</html>

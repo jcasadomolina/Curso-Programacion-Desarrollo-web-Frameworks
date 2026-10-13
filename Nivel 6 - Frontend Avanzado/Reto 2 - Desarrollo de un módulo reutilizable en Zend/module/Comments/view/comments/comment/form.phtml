@@ -1,0 +1,32 @@
+<?php
+/** @var Laminas\View\Renderer\PhpRenderer $this */
+/** @var array{author: string, content: string} $data */
+/** @var list<string> $errors */
+/** @var bool $isEdit */
+$this->headTitle($isEdit ? 'Editar comentario' : 'Nuevo comentario');
+?>
+<div class="mb-4">
+    <a href="<?= $this->url('comments') ?>">&larr; Volver a comentarios</a>
+    <h1 class="mt-3"><?= $isEdit ? 'Editar comentario' : 'Nuevo comentario' ?></h1>
+</div>
+
+<?php if ($errors !== []) : ?>
+    <div class="alert alert-danger" role="alert">
+        <?php foreach ($errors as $error) : ?>
+            <div><?= $this->escapeHtml($error) ?></div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
+<form method="post" class="col-lg-8">
+    <div class="mb-3">
+        <label class="form-label" for="author">Nombre</label>
+        <input class="form-control" id="author" name="author" type="text" maxlength="80" required value="<?= $this->escapeHtmlAttr($data['author']) ?>">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="content">Comentario</label>
+        <textarea class="form-control" id="content" name="content" rows="6" maxlength="2000" required><?= $this->escapeHtml($data['content']) ?></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit"><?= $isEdit ? 'Guardar cambios' : 'Publicar comentario' ?></button>
+    <a class="btn btn-link" href="<?= $this->url('comments') ?>">Cancelar</a>
+</form>

@@ -1,0 +1,70 @@
+<div class="shell">
+  <header class="topbar">
+    <a class="brand" href="#" (click)="$event.preventDefault(); setView('notes')"><span class="brand-mark">n</span><span>noto</span></a>
+    <nav class="nav-links" aria-label="Navegacion principal">
+      <button [class.active]="activeView() === 'notes'" (click)="setView('notes')">Notas <span>{{ notes().length }}</span></button>
+      <button [class.active]="activeView() === 'calendar'" (click)="setView('calendar')">Calendario</button>
+      <button [class.active]="activeView() === 'board'" (click)="setView('board')">Tablero</button>
+    </nav>
+    <div class="profile"><span class="status-dot"></span><span class="avatar">LC</span></div>
+  </header>
+
+  <main class="page">
+    @if (activeView() === 'notes') {
+      <section class="view-heading">
+        <div><p class="eyebrow">Tu espacio personal</p><h1>Todas tus notas<span class="accent">.</span></h1><p class="subheading">Ideas, tareas y recordatorios en un solo lugar.</p></div>
+        <button class="primary-button" (click)="resetEditor()"><span>+</span> Nueva nota</button>
+      </section>
+      <section class="workspace notes-layout">
+        <div class="notes-column">
+          <div class="toolbar"><label class="search-box"><span>⌕</span><input [ngModel]="searchTerm()" (ngModelChange)="searchTerm.set($event)" placeholder="Buscar notas..." aria-label="Buscar notas"></label><span class="note-count">{{ filteredNotes().length }} notas</span></div>
+          <div class="note-grid">
+            @for (note of filteredNotes(); track note.id) {
+              <article class="note-card" [class]="note.color">
+                <div class="card-top"><span class="tag">{{ note.tag }}</span><button class="icon-button" (click)="deleteNote(note.id)" aria-label="Eliminar nota">x</button></div>
+                <h2>{{ note.title }}</h2><p>{{ note.content || 'Sin contenido todavia.' }}</p>
+                <div class="card-footer"><span>{{ note.date ? 'Fecha: ' + note.date : 'Sin fecha' }}</span><button class="text-button" (click)="editNote(note)">Editar</button></div>
+              </article>
+            } @empty { <div class="empty-state"><span>*</span><h2>No hay notas aqui</h2><p>Crea una nueva nota o prueba otra busqueda.</p></div> }
+          </div>
+        </div>
+        <form class="editor" (ngSubmit)="saveNote()">
+          <div class="editor-heading"><div><p class="eyebrow">{{ editingId() === null ? 'Nueva nota' : 'Editando nota' }}</p><h2>{{ editingId() === null ? 'Captura una idea' : 'Actualiza tu nota' }}</h2></div><span class="editor-icon">/</span></div>
+          <label>Titulo<input [ngModel]="draft().title" (ngModelChange)="updateDraft('title', $event)" name="title" placeholder="¿Qué tienes en mente?" required></label>
+          <label>Contenido<textarea [ngModel]="draft().content" (ngModelChange)="updateDraft('content', $event)" name="content" rows="5" placeholder="Escribe algo que quieras recordar..."></textarea></label>
+          <div class="form-row"><label>Etiqueta<select [ngModel]="draft().tag" (ngModelChange)="updateDraft('tag', $event)" name="tag"><option>Personal</option><option>Trabajo</option><option>Diseno</option><option>Ideas</option></select></label><label>Fecha<input type="date" [ngModel]="draft().date" (ngModelChange)="updateDraft('date', $event)" name="date"></label></div>
+          <div class="color-picker"><span>Color</span><button type="button" class="swatch coral" [class.selected]="draft().color === 'coral'" (click)="updateDraft('color', 'coral')" aria-label="Coral"></button><button type="button" class="swatch mint" [class.selected]="draft().color === 'mint'" (click)="updateDraft('color', 'mint')" aria-label="Menta"></button><button type="button" class="swatch lavender" [class.selected]="draft().color === 'lavender'" (click)="updateDraft('color', 'lavender')" aria-label="Lavanda"></button><button type="button" class="swatch butter" [class.selected]="draft().color === 'butter'" (click)="updateDraft('color', 'butter')" aria-label="Amarillo"></button></div>
+          <div class="editor-actions"><button type="button" class="secondary-button" (click)="resetEditor()">Limpiar</button><button type="submit" class="primary-button">{{ editingId() === null ? 'Guardar nota' : 'Guardar cambios' }}</button></div>
+        </form>
+      </section>
+    }
+
+    @if (activeView() === 'calendar') {
+      <section class="view-heading calendar-heading"><div><p class="eyebrow">Organiza tus dias</p><h1>Tu calendario<span class="accent">.</span></h1><p class="subheading">Una vista mensual para no perder de vista tus planes.</p></div><button class="secondary-button today-button" (click)="goToToday()">Hoy</button></section>
+      <section class="calendar-panel month-panel">
+        <div class="month-toolbar"><button class="calendar-nav" (click)="changeCalendarMonth(-1)" aria-label="Mes anterior">&#8592;</button><h2>{{ calendarTitle() }}</h2><button class="calendar-nav" (click)="changeCalendarMonth(1)" aria-label="Mes siguiente">&#8594;</button></div>
+        <div class="weekdays"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
+        <div class="month-grid">
+          @for (day of calendarDays(); track day.date) {
+            <button class="month-day" [class.outside-month]="!day.inMonth" [class.today]="day.isToday" [class.selected-day]="selectedDate() === day.date" (click)="selectCalendarDate(day.date)" [attr.aria-label]="'Seleccionar ' + day.date">
+              <span class="day-number">{{ day.day }}</span>
+              <span class="day-notes">@for (note of notesForDate(day.date); track note.id) {<span class="day-note" [class]="note.color" [title]="note.title"></span>}</span>
+            </button>
+          }
+        </div>
+        <div class="selected-day-panel"><div><p class="eyebrow">Notas del {{ selectedDate() }}</p><h2>{{ notesForDate(selectedDate()).length ? 'Planes para este día' : 'Día despejado' }}</h2></div><div class="selected-notes">@for (note of notesForDate(selectedDate()); track note.id) {<article class="calendar-item" [class]="note.color"><span class="time-mark">o</span><div><h3>{{ note.title }}</h3><p>{{ note.content }}</p></div><button class="text-button" (click)="editNote(note)">Abrir</button></article>} @empty {<p class="calendar-empty-copy">Selecciona otro día o asigna una fecha a una nota desde Notas.</p>}</div></div>
+      </section>
+    }
+
+    @if (activeView() === 'board') {
+      <section class="view-heading"><div><p class="eyebrow">Vista de flujo</p><h1>Tu tablero<span class="accent">.</span></h1><p class="subheading">Mueve cada nota hasta verla terminada.</p></div><button class="primary-button" (click)="setView('notes'); resetEditor()"><span>+</span> Anadir tarjeta</button></section>
+      <section class="board">
+        @for (column of [{ key: 'ideas', label: 'Ideas' }, { key: 'doing', label: 'En curso' }, { key: 'done', label: 'Hecho' }]; track column.key) {
+          <div class="board-column" [class]="column.key + '-column'"><div class="column-heading"><h2>{{ column.label }}</h2><span>{{ columnNotes($any(column.key)).length }}</span></div>
+            @for (note of columnNotes($any(column.key)); track note.id) {<article class="board-card" [class]="note.color"><span class="tag">{{ note.tag }}</span><h3>{{ note.title }}</h3><p>{{ note.content }}</p><select [ngModel]="note.column" (ngModelChange)="moveNote(note.id, $event)" [name]="'column-' + note.id" aria-label="Mover tarjeta"><option value="ideas">Ideas</option><option value="doing">En curso</option><option value="done">Hecho</option></select></article>}
+          </div>
+        }
+      </section>
+    }
+  </main>
+</div>

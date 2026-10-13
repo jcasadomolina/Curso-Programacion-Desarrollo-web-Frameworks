@@ -1,0 +1,52 @@
+<?php
+/** @var Laminas\View\Renderer\PhpRenderer $this */
+/** @var list<Comments\Model\Comment> $comments */
+/** @var bool $isModerator */
+$this->headTitle('Comentarios');
+?>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="mb-1">Comentarios</h1>
+        <p class="text-muted mb-0">Consulta y administra las opiniones publicadas.</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a class="btn btn-primary" href="<?= $this->url('comments/create') ?>">Nuevo comentario</a>
+        <?php if ($isModerator) : ?>
+            <form method="post" action="<?= $this->url('comments/logout') ?>">
+                <button class="btn btn-outline-secondary" type="submit">Cerrar sesión</button>
+            </form>
+        <?php else : ?>
+            <a class="btn btn-outline-secondary" href="<?= $this->url('comments/login') ?>">Acceso moderador</a>
+        <?php endif; ?>
+    </div>
+</div>
+
+<?php if ($comments === []) : ?>
+    <div class="alert alert-info">Todavía no hay comentarios. Sé la primera persona en publicar uno.</div>
+<?php else : ?>
+    <div class="row g-3">
+        <?php foreach ($comments as $comment) : ?>
+            <article class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between gap-3">
+                            <div>
+                                <h2 class="h5 mb-1"><?= $this->escapeHtml($comment->getAuthor()) ?></h2>
+                                <small class="text-muted"><?= $this->escapeHtml($comment->getCreatedAt()) ?></small>
+                            </div>
+                            <?php if ($isModerator) : ?>
+                                <div class="d-flex gap-2">
+                                    <a class="btn btn-sm btn-outline-secondary" href="<?= $this->url('comments/edit', ['id' => $comment->getId()]) ?>">Editar</a>
+                                    <form method="post" action="<?= $this->url('comments/delete', ['id' => $comment->getId()]) ?>">
+                                        <button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button>
+                                    </form>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <p class="card-text mt-3 mb-0"><?= nl2br($this->escapeHtml($comment->getContent())) ?></p>
+                    </div>
+                </div>
+            </article>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>

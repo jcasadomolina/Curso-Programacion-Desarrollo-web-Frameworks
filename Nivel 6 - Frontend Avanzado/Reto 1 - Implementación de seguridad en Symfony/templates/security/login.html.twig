@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'login' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="well">
+                <form action="{{ path('security_login') }}" method="post">
+                    <fieldset>
+                        <legend>{{ 'title.login'|trans }}</legend>
+
+                        {% if error %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error.messageKey|trans(error.messageData, 'security') }}
+                            </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            <label class="form-label" for="username">{{ 'label.username'|trans }}</label>
+                            <input class="form-control" id="username" name="_username" required type="text" value="{{ last_username }}" autocomplete="username">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="password">{{ 'label.password'|trans }}</label>
+                            <input class="form-control" id="password" name="_password" required type="password" autocomplete="current-password">
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <button type="submit" class="btn btn-primary">
+                            {{ 'action.sign_in'|trans }}
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
