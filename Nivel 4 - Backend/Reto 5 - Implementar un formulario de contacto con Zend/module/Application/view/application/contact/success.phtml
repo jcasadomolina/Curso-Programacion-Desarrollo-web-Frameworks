@@ -1,0 +1,29 @@
+<?php
+$title = 'Mensaje Enviado';
+$this->headTitle($title);
+?>
+
+<div class="row justify-content-center my-5">
+    <div class="col-md-8 col-lg-6 text-center">
+        <div class="card shadow-sm border-0 p-4">
+            <div class="card-body">
+                <div class="mb-3 text-success fs-1">
+                    ✓
+                </div>
+                <h1 class="h3 text-success fw-bold mb-3">¡Gracias por contactarnos!</h1>
+                <p class="lead text-secondary mb-4">
+                    Hemos recibido tu mensaje correctamente. Nuestro equipo revisará la información y te responderá lo antes posible.
+                </p>
+
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="<?= $this->url('home') ?>" class="btn btn-outline-primary">
+                        Volver al Inicio
+                    </a>
+                    <a href="<?= $this->url('contacto') ?>" class="btn btn-primary">
+                        Enviar otro mensaje
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- 1. Propiedades de conexión a la base de datos (H2 en memoria) -->
+        <property name="hibernate.connection.driver_class">org.h2.Driver</property>
+        <property name="hibernate.connection.url">jdbc:h2:mem:proyectodb;DB_CLOSE_DELAY=-1</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password"></property>
+
+        <!-- 2. Dialecto SQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
+
+        <!-- 3. Configuraciones adicionales solicitadas -->
+        <property name="hibernate.connection.autocommit">false</property>
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+        
+        <!-- Mostrar SQL y auto-crear la estructura -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Mapeo de la entidad -->
+        <mapping class="com.reto3.Usuario" />
+    </session-factory>
+</hibernate-configuration>
