@@ -1,0 +1,150 @@
+:root {
+	font-family: "Trebuchet MS", Arial, sans-serif;
+	color: #263238;
+	background: #e8f3f5;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	background: linear-gradient(135deg, #e8f3f5, #fff8ee);
+}
+
+.contenedor {
+	width: min(92%, 760px);
+	margin: 0 auto;
+	padding: 3rem 0;
+	text-align: center;
+}
+
+h1 {
+	margin: 0 0 1.5rem;
+	color: #174a5b;
+	font-size: clamp(2rem, 6vw, 3.5rem);
+}
+
+.panel {
+	padding: 2rem;
+	border: 1px solid rgba(23, 74, 91, 0.12);
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.86);
+	box-shadow: 0 12px 30px rgba(23, 74, 91, 0.14);
+    margin-top: 2rem;
+}
+
+h2 {
+	margin-top: 0;
+	color: #d2693c;
+}
+
+.descripcion {
+	margin-bottom: 1.5rem;
+	color: #546e7a;
+}
+
+label {
+	display: block;
+	margin-bottom: 0.5rem;
+	font-weight: bold;
+}
+
+select {
+	width: min(100%, 300px);
+	margin: 0 0.5rem 1rem 0;
+	padding: 0.8rem;
+	border: 1px solid #b0bec5;
+	border-radius: 8px;
+	background: #ffffff;
+	color: #263238;
+	font: inherit;
+}
+
+select:focus-visible {
+	outline: 3px solid rgba(210, 105, 60, 0.35);
+	outline-offset: 2px;
+}
+
+button {
+	padding: 0.8rem 1.2rem;
+	border: 0;
+	border-radius: 8px;
+	color: #ffffff;
+	background: #d2693c;
+	font: inherit;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover,
+button:focus-visible {
+	background: #ae4f2c;
+	box-shadow: 0 5px 14px rgba(174, 79, 44, 0.3);
+	transform: translateY(-2px);
+}
+
+button:disabled {
+	background: #b0bec5;
+	cursor: wait;
+	transform: none;
+}
+
+button:focus-visible {
+	outline: 3px solid rgba(210, 105, 60, 0.35);
+	outline-offset: 3px;
+}
+
+#lista-perros {
+	min-height: 2rem;
+	margin-top: 2rem;
+}
+
+#lista-perros h3 {
+	margin: 0 0 1rem;
+	color: #174a5b;
+}
+
+#lista-perros img {
+	display: block;
+	width: min(100%, 400px);
+	height: auto;
+	margin: 0 auto;
+	border-radius: 12px;
+	box-shadow: 0 8px 20px rgba(38, 50, 56, 0.2);
+	animation: aparecer 0.35s ease-out;
+}
+
+@keyframes aparecer {
+	from {
+		opacity: 0;
+		transform: scale(0.96);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@media (max-width: 480px) {
+	.contenedor {
+		padding: 2rem 0;
+	}
+
+	.panel {
+		padding: 1.5rem 1rem;
+	}
+
+	button {
+		width: 100%;
+	}
+
+	select {
+		width: 100%;
+		margin-right: 0;
+	}
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>API de Perros</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="contenedor">
+	<h1>API de Perros</h1>
+
+	<section class="panel">
+		<h2>Descubre un perro</h2>
+		<p class="descripcion">Pulsa el botón para obtener una imagen aleatoria y conocer su raza.</p>
+		<button id="obtener-perro" type="button">Obtener perro aleatorio</button>
+		<div id="lista-perros" aria-live="polite"></div>
+	</section>
+
+    <section class="panel">
+        <h2>Busca un perro</h2>
+        <p class="descripcion">Utiliza la lista para buscar un perro por su raza y obtener su imagen.</p>
+		<label for="raza-perro">Selecciona una raza:</label>
+		<select id="raza-perro">
+			<option value="">Cargando razas...</option>
+		</select>
+		<button id="busca-perro" type="button" disabled>Buscar</button>
+    </section>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="api-request.js"></script>
+
+<script>
+	$("#obtener-perro").on("click", getRandomDog);
+	$("#busca-perro").on("click", getDogByBreed);
+	getBreeds();
+</script>
+</body>
+</html>

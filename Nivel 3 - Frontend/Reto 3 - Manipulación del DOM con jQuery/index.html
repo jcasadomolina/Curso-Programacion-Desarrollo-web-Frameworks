@@ -1,0 +1,36 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+
+<div>
+    <h1>Organiza tu día</h1>
+
+    <h2>Lista de tareas</h2>
+    <ul id="lista-tareas">
+        <li>Revisar los mensajes pendientes</li>
+        <li>Completar el ejercicio de HTML</li>
+        <li>Guardar los cambios del proyecto</li>
+    </ul>
+
+    <h2>Añadir una tarea</h2>
+    <form>
+        <label for="tarea">Nombre de la tarea:</label>
+        <input type="text" id="tarea" name="tarea" placeholder="Escribe una tarea" required>
+
+        <label for="prioridad">Prioridad:</label>
+        <select id="prioridad" name="prioridad">
+            <option value="alta">Alta</option>
+            <option value="media" selected>Media</option>
+            <option value="baja">Baja</option>
+        </select>
+
+        <button type="submit">Añadir tarea</button>
+    </form>
+
+    <button type="button" id="cambiar-estilo">Resaltar información</button>
+    <button type="button" id="eliminar-tarea">Eliminar última tarea</button>
+
+    <p class="informacion">Planificar las tareas ayuda a organizar mejor el tiempo y a mantener el foco durante el día.</p>
+    <p class="informacion">Elige una prioridad para identificar rápidamente qué actividades requieren atención primero.</p>
+</div>
+
+<script src="script.js"></script>
