@@ -1,0 +1,13 @@
+<h1>Lista de Elementos</h1>
+
+<form (submit)="addElement(elemento.value); elemento.value = ''; $event.preventDefault()">
+    <label for="elemento">Nombre</label>
+    <input #elemento id="elemento" name="elemento" type="text" required>
+    <button type="submit">Añadir</button>
+</form>
+
+<ul>
+    @for (elemento of lista; track $index) {
+        <li>{{ elemento }}</li>
+    }
+</ul>

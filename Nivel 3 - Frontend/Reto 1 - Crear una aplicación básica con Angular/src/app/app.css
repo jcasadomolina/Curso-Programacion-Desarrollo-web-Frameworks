@@ -1,0 +1,15 @@
+.navbar {
+	align-items: center;
+	display: flex;
+	gap: 1rem;
+	padding: 1rem 0;
+}
+
+.navbar-brand {
+	font-weight: 700;
+	margin-right: auto;
+}
+
+main {
+	padding-top: 1rem;
+}
