@@ -1,0 +1,6 @@
+com\reto4\hibernate\service\BookService.class
+com\reto4\hibernate\model\Book.class
+com\reto4\hibernate\model\Author.class
+com\reto4\hibernate\repository\AuthorRepository.class
+com\reto4\hibernate\repository\BookRepository.class
+com\reto4\hibernate\HibernateApplication.class

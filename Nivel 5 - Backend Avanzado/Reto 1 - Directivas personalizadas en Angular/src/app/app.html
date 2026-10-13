@@ -1,0 +1,75 @@
+<div class="contenedor">
+  <h2 class="titulo">Gestión de Inventario</h2>
+
+  <!-- Tarjeta de Filtros -->
+  <div class="filtros-card">
+  <div class="filtro-grupo">
+    <label>Categoría</label>
+    <select class="input-moderno" [(ngModel)]="filtrosActuales.categoria" (ngModelChange)="actualizarFiltros()">
+      <option value="">Todas las categorías</option>
+      <option *ngFor="let cat of categoriasDisponibles" [value]="cat">
+        {{ cat }}
+      </option>
+    </select>
+  </div>
+
+    <div class="filtro-grupo">
+      <label>Precio Min ($)</label>
+      <input class="input-moderno" type="number" placeholder="Ej. 100" [(ngModel)]="filtrosActuales.precioMin" (ngModelChange)="actualizarFiltros()" />
+    </div>
+
+    <div class="filtro-grupo">
+      <label>Fecha Desde</label>
+      <input class="input-moderno" type="date" [(ngModel)]="filtrosActuales.fechaInicio" (ngModelChange)="actualizarFiltros()" />
+    </div>
+
+    <div class="filtro-grupo">
+      <label>Fecha Hasta</label>
+      <input class="input-moderno" type="date" [(ngModel)]="filtrosActuales.fechaFin" (ngModelChange)="actualizarFiltros()" />
+    </div>
+  </div>
+
+  <ng-container 
+    [appManejadorTabla]="datosOriginales" 
+    [filtros]="filtrosActuales"
+    [ordenConfig]="ordenActual"
+    (datosProcesados)="actualizarVista($event)">
+  </ng-container>
+
+  <!-- Contenedor de la Tabla -->
+  <div class="tabla-card">
+    <table class="tabla-moderna">
+      <thead>
+        <tr>
+          <th (click)="cambiarOrden('nombre')">
+            Nombre 
+            <span class="icono-orden" *ngIf="ordenActual.columna === 'nombre'">{{ ordenActual.direccion === 'asc' ? '↑' : '↓' }}</span>
+          </th>
+          <th (click)="cambiarOrden('categoria')">
+            Categoría 
+            <span class="icono-orden" *ngIf="ordenActual.columna === 'categoria'">{{ ordenActual.direccion === 'asc' ? '↑' : '↓' }}</span>
+          </th>
+          <th (click)="cambiarOrden('precio')">
+            Precio 
+            <span class="icono-orden" *ngIf="ordenActual.columna === 'precio'">{{ ordenActual.direccion === 'asc' ? '↑' : '↓' }}</span>
+          </th>
+          <th (click)="cambiarOrden('fecha')">
+            Fecha 
+            <span class="icono-orden" *ngIf="ordenActual.columna === 'fecha'">{{ ordenActual.direccion === 'asc' ? '↑' : '↓' }}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of datosMostrados">
+          <td class="fw-bold">{{ item.nombre }}</td>
+          <td><span class="badge">{{ item.categoria }}</span></td>
+          <td class="texto-verde">${{ item.precio }}</td>
+          <td class="texto-gris">{{ item.fecha }}</td>
+        </tr>
+        <tr *ngIf="datosMostrados.length === 0">
+          <td colspan="4" class="estado-vacio">No hay datos que coincidan con los filtros.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
