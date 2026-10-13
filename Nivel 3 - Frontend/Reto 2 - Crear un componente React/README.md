@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+# Documentación del Reto 2
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. Resumen del proyecto
 
-## Available Scripts
+Este proyecto es una aplicación web desarrollada con [[React]] para practicar el paso de propiedades y la gestión de estado en un [[componente]]. La interfaz muestra un nombre, una fecha y un contador de visitas. Cada vez que la persona usuaria pulsa el botón, el contador se actualiza sin recargar la página.
 
-In the project directory, you can run:
+La aplicación utiliza [[JavaScript]], [[JSX]] y [[CSS]]. La configuración se basa en [[Create React App]], que proporciona las herramientas necesarias para iniciar el servidor de desarrollo, ejecutar pruebas y generar una compilación de producción.
 
-### `npm start`
+## 2. Objetivo funcional
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+El flujo principal de la aplicación es el siguiente:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. El componente `App` prepara los datos `nombre` y `fecha`.
+2. `App` envía esos datos al componente `VisualizadorProps` mediante [[props]].
+3. `VisualizadorProps` recibe las props y las muestra mediante [[interpolación]] en JSX.
+4. El componente mantiene el número de visitas mediante [[estado local]].
+5. Al pulsar el botón, se ejecuta un [[evento]] que incrementa el contador.
+6. React vuelve a renderizar la interfaz con el valor actualizado.
 
-### `npm test`
+Este flujo representa un ejemplo sencillo de [[programación reactiva de interfaces]], donde la vista depende del estado y de los datos recibidos por el componente.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 3. Estructura de la aplicación
 
-### `npm run build`
+### Componente raíz
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`App` funciona como punto de entrada de la interfaz. Importa `VisualizadorProps` y `VisualizadorProps.css`, y renderiza el componente pasando los valores `nombre` y `fecha`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+La función `App` es un [[componente funcional]]. Su responsabilidad es componer la vista principal y proporcionar los datos iniciales al componente encargado de visualizarlos.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Componente VisualizadorProps
 
-### `npm run eject`
+`VisualizadorProps` es un componente funcional que recibe las props `nombre` y `fecha`. En su interior declara el estado `visitas` mediante `useState`, que comienza con el valor cero.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+El componente también utiliza `useEffect` para modificar el título del documento cuando cambia `nombre`. Este comportamiento muestra cómo un [[efecto secundario]] puede sincronizar el estado de React con una API del navegador, en este caso `document.title`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Presentación y estilos
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+La estructura visual se define mediante JSX y los estilos se importan desde `VisualizadorProps.css`. La clase `.visualizador-props` utiliza [[Flexbox]] para organizar el contenido en una columna, centrarlo y aplicar espaciado, color de fondo, bordes redondeados y sombra.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+La separación entre lógica y estilos facilita el mantenimiento del componente y aplica el principio de [[separación de responsabilidades]].
 
-## Learn More
+## 4. Conceptos de programación aplicados
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Props
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Las [[props]] son datos de entrada que un componente recibe desde su componente padre. En este proyecto, `App` proporciona `nombre` y `fecha` a `VisualizadorProps`.
 
-### Code Splitting
+Las props permiten reutilizar el componente con diferentes valores sin modificar su lógica interna. El componente hijo las recibe mediante la desestructuración del parámetro de la función.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Estado
 
-### Analyzing the Bundle Size
+La variable `visitas` representa el [[estado]] interno del componente. `useState(0)` devuelve el valor actual y la función `setVisitas`, que permite solicitar una actualización.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+La expresión `setVisitas(visitas + 1)` incrementa el contador después de cada interacción. Cuando el estado cambia, React realiza un nuevo [[renderizado]] para reflejar el resultado en la interfaz.
 
-### Making a Progressive Web App
+### Eventos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+La propiedad `onClick` registra un [[manejador de eventos]] para el botón. Cuando la persona usuaria hace clic, se ejecuta la función que actualiza `visitas`.
 
-### Advanced Configuration
+Este mecanismo permite responder a la interacción sin manipular directamente el [[DOM]]. React gestiona la actualización de la vista a partir del nuevo estado.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Interpolación y JSX
 
-### Deployment
+Las expresiones `{nombre}`, `{fecha}` y `{visitas}` insertan valores dinámicos dentro del marcado JSX. Esta forma de [[interpolación]] mantiene la presentación vinculada a los datos del componente.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+JSX combina la sintaxis de JavaScript con una estructura similar a [[HTML]]. Durante la compilación, esta sintaxis se transforma en llamadas que React utiliza para construir la interfaz.
 
-### `npm run build` fails to minify
+### Efectos secundarios
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`useEffect` ejecuta una operación después del renderizado. En este caso, actualiza el título de la pestaña con una cadena basada en `nombre`.
+
+La dependencia `[nombre]` indica que el efecto debe volver a ejecutarse cuando cambie ese valor. Así se evita ejecutar innecesariamente la misma operación en cada renderizado.
+
+## 5. Tecnologías y herramientas
+
+### React
+
+[[React]] es la librería utilizada para construir la interfaz mediante componentes. Su modelo basado en estado, props y renderizado declarativo permite describir qué debe mostrar la aplicación en cada momento.
+
+### JavaScript y JSX
+
+[[JavaScript]] aporta la lógica de la aplicación, mientras que [[JSX]] permite declarar la estructura visual dentro de los componentes. La combinación de ambos facilita mantener cerca los datos y la representación que depende de ellos.
+
+### Create React App
+
+[[Create React App]] proporciona la configuración inicial del proyecto y los comandos definidos en `package.json`:
+
+- `npm start` inicia el servidor de desarrollo.
+- `npm run build` genera una compilación optimizada para producción.
+- `npm test` ejecuta las pruebas configuradas.
+- `npm run eject` expone la configuración interna del proyecto y es una operación irreversible.
+
+### CSS y Flexbox
+
+[[CSS]] controla la presentación del componente. La propiedad `display: flex` activa [[Flexbox]], que se utiliza para distribuir y alinear los elementos de la interfaz.
+
+## 6. Flujo de datos
+
+```text
+App -> props -> VisualizadorProps -> onClick -> setVisitas -> renderizado -> interfaz actualizada
+```
+
+El flujo es principalmente unidireccional: los datos bajan desde `App` mediante props, mientras que la interacción modifica el estado interno de `VisualizadorProps`. React utiliza ese estado para volver a representar el contenido visible.
+
+## 7. Pruebas y aspectos mejorables
+
+El proyecto incluye una prueba basada en [[React Testing Library]]. La prueba actual todavía busca el texto predeterminado `learn react`, por lo que no coincide con la interfaz implementada y debería actualizarse.
+
+Sería conveniente añadir pruebas que:
+
+- Comprueben que `nombre` y `fecha` aparecen al renderizar el componente.
+- Verifiquen que el contador comienza en cero.
+- Confirmen que `setVisitas` incrementa el contador después de pulsar el botón.
+- Comprueben que el título del documento se actualiza con el nombre recibido.
+
+También puede mejorarse la implementación usando la actualización funcional `setVisitas(valorActual => valorActual + 1)`, especialmente si se encadenan varias actualizaciones de estado.
+
+## 8. Conclusión
+
+El proyecto presenta una implementación compacta de una interfaz basada en [[componentes]], [[props]], [[estado]] y [[eventos]]. Aunque su funcionalidad es sencilla, reúne fundamentos esenciales del [[desarrollo frontend]] con React: composición de componentes, actualización reactiva, efectos secundarios, JSX y estilos mediante CSS.
+
+Su estructura permite evolucionar la aplicación añadiendo validaciones, más propiedades, persistencia de datos o nuevas acciones sin mezclar la responsabilidad de cada parte.
