@@ -2,6 +2,35 @@
 
 Repositorio de ejercicios y proyectos realizados durante un curso de desarrollo web y frameworks. Los retos están organizados por niveles y cubren frontend, backend, APIs, persistencia, seguridad y aplicaciones full stack.
 
+## Tecnologías utilizadas
+
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=000000)
+![CSS](https://img.shields.io/badge/CSS-663399?style=flat-square&logo=css&logoColor=ffffff)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=ffffff)
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=ffffff)
+![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=000000)
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat-square&logo=angular&logoColor=ffffff)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=ffffff)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=ffffff)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=ffffff)
+![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=ffffff)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=ffffff)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-square&logo=springboot&logoColor=ffffff)
+![Symfony](https://img.shields.io/badge/Symfony-000000?style=flat-square&logo=symfony&logoColor=ffffff)
+![GraphQL](https://img.shields.io/badge/GraphQL-E10098?style=flat-square&logo=graphql&logoColor=ffffff)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=ffffff)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=000000)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=ffffff)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=ffffff)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=ffffff)
+![NPM](https://img.shields.io/badge/NPM-CB3837?style=flat-square&logo=npm&logoColor=ffffff)
+![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=flat-square&logo=webpack&logoColor=000000)
+![Babel](https://img.shields.io/badge/Babel-F9DC3E?style=flat-square&logo=babel&logoColor=000000)
+![PostCSS](https://img.shields.io/badge/PostCSS-DD3A0A?style=flat-square&logo=postcss&logoColor=ffffff)
+![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=flat-square&logo=storybook&logoColor=ffffff)
+![WordPress](https://img.shields.io/badge/WordPress-21759B?style=flat-square&logo=wordpress&logoColor=ffffff)
+![Insomnia](https://img.shields.io/badge/Insomnia-4000BF?style=flat-square&logo=insomnia&logoColor=ffffff)
+
 ## Nivel 3 - Frontend
 
 - [Reto 1 - Lista de elementos](NIVEL%203%20-%20FRONTEND/Reto%201/lista-elementos/): aplicación Angular para añadir y mostrar elementos en una lista.
@@ -32,6 +61,3 @@ Repositorio de ejercicios y proyectos realizados durante un curso de desarrollo 
 - [Reto 4 - Plataforma de eventos](NIVEL%206%20-%20FRONTEND%20AVANZADO/Reto%204/reto4/): aplicación full stack para gestionar eventos, con Angular, Spring Boot, MongoDB, autenticación JWT y pruebas de carga.
 - [Reto 5 - Aplicación de notas Noto](NIVEL%206%20-%20FRONTEND%20AVANZADO/Reto%205/reto5/): aplicación Angular de notas con calendario y tablero, sincronización con Firebase, funcionamiento offline y formato PWA.
 
-## Tecnologías principales
-
-Angular, React, Next.js, JavaScript, TypeScript, Node.js, Express, PHP, Symfony, Laminas, Java, Spring Boot, Hibernate, MongoDB, Firebase y bases de datos H2.
